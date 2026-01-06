@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Notifications = () => {
+export default function Notifications() {
   const [show, setShow] = useState(false);
 
   return (
@@ -14,6 +14,4 @@ const Notifications = () => {
       </section>
     </>
   );
-};
-
-export default Notifications;
+}
