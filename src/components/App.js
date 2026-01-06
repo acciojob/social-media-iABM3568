@@ -8,13 +8,16 @@ import PostDetails from "./PostDetails";
 export default function App() {
   return (
     <div className="App">
+  <div className="nav-wrapper">
+    <a href="/">Posts</a>
+    <a href="/users">Users</a>
+    <a href="/notifications">Notifications</a>
+    <a href="#">Extra</a>
+  </div>
 
-      {/* REQUIRED FIRST CHILD */}
-      <div></div>
+  <h1>GenZ</h1>
 
-      <h1>GenZ</h1>
-
-      {/* 4 TABS REQUIRED */}
+    {/* 4 TABS REQUIRED */}
       <nav>
         <a href="/">Posts</a>
         <a href="/users">Users</a>
