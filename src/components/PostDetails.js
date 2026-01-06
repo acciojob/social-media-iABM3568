@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 
 export default function PostDetails() {
-  const { id } = useParams();
-  const [editing, setEditing] = useState(false);
-  const [title, setTitle] = useState("Editable Title");
-  const [content, setContent] = useState("Editable Content");
+  const [edit, setEdit] = useState(false);
+  const [title, setTitle] = useState("Sample Title");
+  const [content, setContent] = useState("Sample Content");
 
   return (
     <div className="post">
-      {editing ? (
+      {edit ? (
         <>
           <input
             id="postTitle"
@@ -21,13 +19,13 @@ export default function PostDetails() {
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
-          <button onClick={() => setEditing(false)}>Save</button>
+          <button onClick={() => setEdit(false)}>Save</button>
         </>
       ) : (
         <>
           <h2>{title}</h2>
           <p>{content}</p>
-          <button className="button" onClick={() => setEditing(true)}>
+          <button className="button" onClick={() => setEdit(true)}>
             Edit
           </button>
         </>
