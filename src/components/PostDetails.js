@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
-const PostDetails = () => {
-  const [title, setTitle] = useState("Post Title");
-  const [content, setContent] = useState("Post Content");
+export default function PostDetails() {
+  const { id } = useParams();
   const [editing, setEditing] = useState(false);
+  const [title, setTitle] = useState("Editable Title");
+  const [content, setContent] = useState("Editable Content");
 
   return (
     <div className="post">
@@ -32,6 +34,4 @@ const PostDetails = () => {
       )}
     </div>
   );
-};
-
-export default PostDetails;
+}
