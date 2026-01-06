@@ -1,45 +1,82 @@
 import React, { useState } from "react";
 
-const Posts = () => {
-  const [reactions, setReactions] = useState([0, 0, 0, 0]);
+export default function Posts() {
+  const [posts, setPosts] = useState([
+    {
+      id: 1,
+      title: "Hello World",
+      content: "First post content",
+      reactions: [0, 0, 0, 0, 0],
+    },
+  ]);
+
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [content, setContent] = useState("");
+
+  const addPost = () => {
+    setPosts([
+      ...posts,
+      {
+        id: posts.length + 1,
+        title,
+        content,
+        reactions: [0, 0, 0, 0, 0],
+      },
+    ]);
+  };
+
+  const react = (postIndex, reactionIndex) => {
+    if (reactionIndex === 4) return;
+
+    const copy = [...posts];
+    copy[postIndex].reactions[reactionIndex]++;
+    setPosts(copy);
+  };
 
   return (
     <>
-      <h1>GenZ</h1>
+      <section>
+        <input
+          id="postTitle"
+          placeholder="Post title"
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
-      <div className="posts-list">
-        {/* Dummy first child */}
+        <select id="postAuthor" onChange={(e) => setAuthor(e.target.value)}>
+          <option>Select Author</option>
+          <option>Author 1</option>
+          <option>Author 2</option>
+        </select>
+
+        <textarea
+          id="postContent"
+          onChange={(e) => setContent(e.target.value)}
+        ></textarea>
+
+        <button onClick={addPost}>Save Post</button>
+      </section>
+
+      <section className="posts-list">
         <div></div>
 
-        {/* SECOND CHILD = POST */}
-        <div className="post">
-          <h3>Draped neatly on a hanger</h3>
+        {posts.map((post, index) => (
+          <div key={post.id}>
+            <h3>{post.title}</h3>
+            <p>{post.content}</p>
 
-          {/* REACTIONS */}
-          {reactions.map((r, i) => (
-            <button
-              key={i}
-              onClick={() => {
-                const copy = [...reactions];
-                copy[i]++;
-                setReactions(copy);
-              }}
-            >
-              {r}
-            </button>
-          ))}
+            {post.reactions.map((count, i) => (
+              <button key={i} onClick={() => react(index, i)}>
+                {count}
+              </button>
+            ))}
 
-          {/* FIFTH BUTTON NEVER CHANGES */}
-          <button>0</button>
-
-          {/* VIEW POST */}
-          <a className="button" href="/posts/1">
-            View Post
-          </a>
-        </div>
-      </div>
+            <a className="button" href={`/posts/${post.id}`}>
+              View Post
+            </a>
+          </div>
+        ))}
+      </section>
     </>
   );
-};
-
-export default Posts;
+}
