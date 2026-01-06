@@ -6,9 +6,9 @@ export default function Users() {
   if (step === 0) {
     return (
       <ul>
-        <li onClick={() => setStep(1)}>U1</li>
-        <li onClick={() => setStep(1)}>U2</li>
-        <li onClick={() => setStep(1)}>U3</li>
+        <li onClick={() => setStep(1)}>User 1</li>
+        <li onClick={() => setStep(1)}>User 2</li>
+        <li onClick={() => setStep(1)}>User 3</li>
       </ul>
     );
   }
@@ -16,8 +16,8 @@ export default function Users() {
   if (step === 1) {
     return (
       <ul>
-        <li>P1</li>
-        <li onClick={() => setStep(2)}>P2</li>
+        <li>Post A</li>
+        <li onClick={() => setStep(2)}>Post B</li>
       </ul>
     );
   }
