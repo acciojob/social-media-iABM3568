@@ -10,7 +10,7 @@ export default function Notifications() {
       </button>
 
       <section className="notificationsList">
-        {show && <div>Notification</div>}
+        {show && <div>New Notification</div>}
       </section>
     </>
   );
