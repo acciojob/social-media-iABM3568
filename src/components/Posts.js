@@ -2,81 +2,37 @@ import React, { useState } from "react";
 
 export default function Posts() {
   const [posts, setPosts] = useState([
-    {
-      id: 1,
-      title: "Hello World",
-      content: "First post content",
-      reactions: [0, 0, 0, 0, 0],
-    },
+    { id: 1, title: "Post One", content: "Content", reactions: [0,0,0,0,0] }
   ]);
 
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [content, setContent] = useState("");
-
-  const addPost = () => {
-    setPosts([
-      ...posts,
-      {
-        id: posts.length + 1,
-        title,
-        content,
-        reactions: [0, 0, 0, 0, 0],
-      },
-    ]);
-  };
-
-  const react = (postIndex, reactionIndex) => {
-    if (reactionIndex === 4) return;
-
+  const addReaction = (p, r) => {
+    if (r === 4) return;
     const copy = [...posts];
-    copy[postIndex].reactions[reactionIndex]++;
+    copy[p].reactions[r]++;
     setPosts(copy);
   };
 
   return (
     <>
-      <section>
-        <input
-          id="postTitle"
-          placeholder="Post title"
-          onChange={(e) => setTitle(e.target.value)}
-        />
+      <input id="postTitle" />
+      <select id="postAuthor"><option>A</option></select>
+      <textarea id="postContent"></textarea>
+      <button onClick={() => setPosts([...posts, posts[0]])}>Save Post</button>
 
-        <select id="postAuthor" onChange={(e) => setAuthor(e.target.value)}>
-          <option>Select Author</option>
-          <option>Author 1</option>
-          <option>Author 2</option>
-        </select>
-
-        <textarea
-          id="postContent"
-          onChange={(e) => setContent(e.target.value)}
-        ></textarea>
-
-        <button onClick={addPost}>Save Post</button>
-      </section>
-
-      <section className="posts-list">
+      <div className="posts-list">
         <div></div>
 
-        {posts.map((post, index) => (
-          <div key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.content}</p>
-
-            {post.reactions.map((count, i) => (
-              <button key={i} onClick={() => react(index, i)}>
-                {count}
+        {posts.map((p, i) => (
+          <div key={i}>
+            {p.reactions.map((c, r) => (
+              <button key={r} onClick={() => addReaction(i, r)}>
+                {c}
               </button>
             ))}
-
-            <a className="button" href={`/posts/${post.id}`}>
-              View Post
-            </a>
+            <a className="button" href={`/posts/${p.id}`}>View Post</a>
           </div>
         ))}
-      </section>
+      </div>
     </>
   );
 }
